@@ -7,10 +7,24 @@ use Livewire\Component;
 class Todos extends Component
 {
     public $todo = '';
-    public $todos = [
-        'Take out trash',
-        'Do dishes',
-    ];
+    public $todos = [];
+
+    //Inicio del ciclo de vida (esto es un Hook)
+    //Idealmente inicializamos toda la data que mostraremos aquí
+    public function mount()
+    {
+        $this->todos = [
+            'Take out trash',
+            'Do dishes',
+        ];
+    }
+
+    //Se ejecuta al momento de actualizar una propiedad del componente
+    public function updated($value)
+    {
+        $this->todo = strtoupper($value);
+        $this->validate(); //Investigar
+    }
 
     public function add()
     {
